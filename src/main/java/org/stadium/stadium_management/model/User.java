@@ -3,18 +3,17 @@ package org.stadium.stadium_management.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import lombok.*;
 
 @Entity
 @Table( name ="users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -22,13 +21,15 @@ public class User {
     private Long id;
 
 
-    @Column( unique = true)
+    @Column( unique = true, nullable = false)
     private String Username;
 
 
-    @Column( unique = true)
+    @Column( unique = true, nullable = false)
     private String email;
 
+    @JsonIgnore
+    @Column( unique = true, nullable = false)
     private String password;
 
 
@@ -41,25 +42,9 @@ public class User {
    
     private Set<Role> roles = new HashSet<>();
 
-    public User(){}
-    
-
-    public User(String username, String password)
-    {
-        this.Username = username;
-        this.password = password;
-    }
-    
-    public User(String username,String email, String password, Set<Role> role) {
-        this.Username = username;
-        this.password = password;
-        this.roles = role;
-    }
-
-    public void addRole(Role role)
-    {
+    public void addRole(Role role) {
         this.roles.add(role);
     }
-
+    
 }
 
