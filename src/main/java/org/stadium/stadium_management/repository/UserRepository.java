@@ -20,14 +20,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-    default Optional<User> findCacheUser(Long id)
-    {
-        return Optional.ofNullable(userCache.get(id));
-    }
+    Optional<User> findCacheUser(Long id);
+    
+    
 
-    default void cacheUser(User user)
-    {
-        userCache.put(user.getId(), user);
-    }
+
+
+
+
 }
 

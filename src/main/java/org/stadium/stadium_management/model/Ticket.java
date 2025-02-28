@@ -25,22 +25,27 @@ import jakarta.persistence.GenerationType;
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Ticket_Id;
+    private Long ticketId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TicketType Ticket_Type;
+    private TicketType ticketType;
 
     @Column(nullable = false)
-    private TicketStatus Ticket_Status;
+    private TicketStatus ticketStatus;
 
     @Column(nullable = false)
-    private BigDecimal   Ticket_Cost;
+    private long ticketCost;
 
     @Column(nullable = false)
-    private LocalDateTime Ticket_Start;
+    private LocalDateTime ticketStart;
     @Column(nullable = false)
-    private LocalDateTime Ticket_End;
+    private LocalDateTime ticketEnd;
+
+    public long getTicketCost()
+    {
+        return ticketCost;
+    }
 
 
 @ManyToOne
