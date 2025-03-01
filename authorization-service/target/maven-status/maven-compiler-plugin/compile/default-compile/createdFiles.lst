@@ -1,0 +1,3 @@
+org\stadium\AuthorizationServiceApplication.class
+org\stadium\userauthorization\authorization\UserRole.class
+org\stadium\userauthorization\authorization\Permission.class

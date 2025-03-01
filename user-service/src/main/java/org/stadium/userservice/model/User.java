@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -37,8 +38,9 @@ public class User {
     @Column( unique = true, nullable = false)
     private String password;
 
-    @Column(name ="registered_DT", nullable = false)
-    private LocalDateTime registeredDateTime;
+    @Column(name ="created_dT", nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }
 
