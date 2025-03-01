@@ -1,1 +1,2 @@
-org\stadium\Main.class
+org\stadium\userservice\model\User.class
+org\stadium\UserServiceApplication.class
