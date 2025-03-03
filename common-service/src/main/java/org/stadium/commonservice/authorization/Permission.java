@@ -1,4 +1,4 @@
-package org.stadium.userauthorization.authorization;
+package org.stadium.commonservice.authorization;
 
 import lombok.Getter;
 
