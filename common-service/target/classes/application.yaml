@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: common-service
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
