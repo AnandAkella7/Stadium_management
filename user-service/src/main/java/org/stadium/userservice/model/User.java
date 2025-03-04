@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
+import org.stadium.commonservice.authorization.UserRole;
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -20,7 +22,7 @@ import lombok.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private Long id;
 
 
@@ -41,6 +43,10 @@ public class User {
     @Column(name ="created_dT", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @Enumerated(EnumType.STRING)
+    @Column( name="user_role", nullable = false, updatable = false)
+    private UserRole userRole;
 
 }
 
