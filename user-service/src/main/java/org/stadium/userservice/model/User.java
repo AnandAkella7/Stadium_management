@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.stadium.commonservice.authorization.UserRole;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,7 +24,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
 
 
     @Column( unique = true, nullable = false)
