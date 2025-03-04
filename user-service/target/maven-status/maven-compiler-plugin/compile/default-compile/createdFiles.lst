@@ -1,2 +1,3 @@
 org\stadium\userservice\model\User.class
 org\stadium\UserServiceApplication.class
+org\stadium\userservice\repository\UserRepository.class

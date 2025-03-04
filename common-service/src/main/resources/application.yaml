@@ -5,3 +5,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+  jwt:
+    secret: "aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789+AbCdEfG="
+    expiration: 86400000
+    issuer: "Yegna-Sai-Anand-Akella"
+  logging:
+    level:
+      org.springframework.security: DEBUG

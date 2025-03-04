@@ -1,3 +1,6 @@
-org\stadium\commonservice\authorization\UserRole.class
+org\stadium\commonservice\security\WebSecurityConfig.class
 org\stadium\CommonServiceApplication.class
 org\stadium\commonservice\authorization\Permission.class
+org\stadium\commonservice\authorization\UserRole.class
+org\stadium\commonservice\security\JwtUtils.class
+org\stadium\commonservice\security\JwtConfig.class
