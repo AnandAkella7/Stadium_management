@@ -12,3 +12,12 @@ spring:
   logging:
     level:
       org.springframework.security: DEBUG
+
+resilience4j.circuitbreaker:
+  instances:
+    user-service:
+      register-health-indicator: true
+      failure-rate-threshold: 50
+      minimum-number-of-calls: 5
+      sliding-window-type: COUNT_BASED
+      sliding-window-size: 10
