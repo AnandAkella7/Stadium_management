@@ -5,12 +5,12 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.stadium.userservice.model.User;
+import org.stadium.userservice.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,UUID>{
 
-    Optional<User> findbyEmail(String email);
+    Optional<User> findByEmail(String email);
     boolean existsByEmail(String email);
 
     

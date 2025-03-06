@@ -22,7 +22,7 @@ public class InternalUserController {
 
     @GetMapping("/{email}")
     public ResponseEntity<UserDetailsDto> getUserByEmail(@PathVariable String email) {
-        return userRepository.findbyEmail(email)
+        return userRepository.findByEmail(email)
                 .map(user -> new UserDetailsDto(
                     user.getEmail(),
                     user.getPassword(),

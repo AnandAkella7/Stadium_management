@@ -15,7 +15,7 @@ import org.stadium.commonservice.authorization.UserRole;
 import org.stadium.commonservice.security.JwtUtils;
 import org.stadium.userservice.dto.LoginRequest;
 import org.stadium.userservice.dto.RegisterRequest;
-import org.stadium.userservice.model.User;
+import org.stadium.userservice.entity.User;
 import org.stadium.userservice.repository.UserRepository;
 
 @RestController

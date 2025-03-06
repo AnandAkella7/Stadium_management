@@ -1,3 +1,12 @@
-org\stadium\userservice\model\User.class
-org\stadium\UserServiceApplication.class
+org\stadium\userservice\service\CustomUserDetailsService.class
+org\stadium\userservice\dto\RegisterRequest.class
+org\stadium\userservice\entity\User.class
+org\stadium\userservice\dto\TokenResponseDto.class
+org\stadium\userservice\userconfig\SecurityConfig.class
+org\stadium\userservice\controller\AuthenticationController.class
+org\stadium\userservice\controller\InternalUserController.class
+org\stadium\userservice\dto\LoginRequest.class
 org\stadium\userservice\repository\UserRepository.class
+org\stadium\userservice\entity\RefreshToken.class
+org\stadium\userservice\userconfig\BulkheadConfigOverride.class
+org\stadium\UserServiceApplication.class

@@ -1,4 +1,4 @@
-package org.stadium.userservice.model;
+package org.stadium.userservice.entity;
 
 import jakarta.persistence.Entity;
 
@@ -15,6 +15,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+
 @Table( name ="users")
 @Getter
 @Setter
@@ -29,7 +30,7 @@ public class User {
 
     @Column( unique = true, nullable = false)
     @NotBlank(message =" Username is required")
-    private String Username;
+    private String username;
 
 
     @Column( unique = true, nullable = false)
