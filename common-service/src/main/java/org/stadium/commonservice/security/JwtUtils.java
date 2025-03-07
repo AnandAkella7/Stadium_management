@@ -15,9 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
+
 import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 
 
@@ -38,13 +37,13 @@ public class JwtUtils {
             .issuer(jwtConfig.getIssuer())
             .issuedAt(new Date(System.currentTimeMillis()))
             .expiration(new Date(System.currentTimeMillis()+ jwtConfig.getExpiration()))
-            .signWith(jwtConfig.secretKey())
+            .signWith(secretKey)
             .compact();
     }
     public boolean validateJwtToken(String authToken){
         try {
             Jwts.parser()
-                .verifyWith(jwtConfig.secretKey())
+                .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(authToken);
             return true;

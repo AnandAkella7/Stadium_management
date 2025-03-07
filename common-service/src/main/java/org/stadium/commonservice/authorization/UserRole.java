@@ -20,12 +20,11 @@ public enum UserRole {
         Permission.TICKET_VIEW,
         Permission.EVENT_VIEW,
         Permission.REPORT_GENERATE)),
-    ADMIN(Set.of(Permission.values()));
+    ADMIN(Permission.ALL_PERMISSIONS);
 
     private final Set<Permission> permissions;
 
-    UserRole(Set<Permission> permissions)
-    {
+    UserRole(Set<Permission> permissions){
         this.permissions = permissions;
     }
 
@@ -34,11 +33,5 @@ public enum UserRole {
             .map(permission -> new SimpleGrantedAuthority(permission.getAuthority()))
             .collect(Collectors.toSet());
 
-
-
-
-
-    
-
-}
+    }
 }

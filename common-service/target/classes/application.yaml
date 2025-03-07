@@ -21,3 +21,5 @@ resilience4j.circuitbreaker:
       minimum-number-of-calls: 5
       sliding-window-type: COUNT_BASED
       sliding-window-size: 10
+user-service:
+  url: http://localhost:8081
