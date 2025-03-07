@@ -1,5 +1,10 @@
 package org.stadium.commonservice.authorization;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import lombok.Getter;
 
 @Getter
@@ -22,6 +27,16 @@ public enum Permission
     Permission(String authority)
     {
         this.authority = authority;
+    }
+
+    public static final Set<Permission> ALL_PERMISSIONS;
+
+
+    static{
+        Set<Permission> all = new HashSet<>();
+        Collections.addAll(all, values());
+        ALL_PERMISSIONS =  Collections.unmodifiableSet(all);
+        
     }
 
 }

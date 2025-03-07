@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.stadium.commonservice.dto.UserDetailsDto;
 
 @FeignClient(name = "user-service",
-            url = "${user-service.url}",
+            url = "http://localhost:8081",
             configuration = FeignSecurityConfiguration.class)
 public interface UserFeignClient {
     @GetMapping("/api/internal/users/{email}")

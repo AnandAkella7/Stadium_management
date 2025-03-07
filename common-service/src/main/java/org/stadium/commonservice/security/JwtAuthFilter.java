@@ -28,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtUtils jwtUtils;
     private final UserFeignClient userFeignClient;
+ 
     private final CircuitBreakerFactory circuitBreakerFactory;
 
     @Override
@@ -52,7 +53,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authentication = 
                     new UsernamePasswordAuthenticationToken(
                         userDetails.toUserDetails(),
-                        null,
+                        jwt,
                         userDetails.toUserDetails().getAuthorities()
                     );
                 authentication.setDetails(
