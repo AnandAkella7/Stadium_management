@@ -39,7 +39,7 @@ public class User {
     private String email;
 
     @JsonIgnore
-    @Column( unique = true, nullable = false)
+    @Column( nullable = false)
     private String password;
 
     @Column(name ="created_dT", nullable = false, updatable = false)

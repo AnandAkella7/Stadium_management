@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import jakarta.servlet.Filter;
@@ -29,7 +30,13 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/v1/auth/register").permitAll()
                 .requestMatchers("/api/v1/auth/login").permitAll()
-                .requestMatchers("/api/internal/users/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/auth/refresh-token").permitAll()
+                .requestMatchers("/api/internal/users/**")
+                    .access(
+                        new WebExpressionAuthorizationManager(
+                            "hasRole(admin) or hasHeader('X-Internal-Request','true')"
+                            )
+                        )
                 .requestMatchers("/api/users/profile").authenticated()
                 .anyRequest().authenticated()
             )
