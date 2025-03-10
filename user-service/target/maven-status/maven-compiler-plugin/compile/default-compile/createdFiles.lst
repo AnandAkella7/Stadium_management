@@ -7,6 +7,11 @@ org\stadium\userservice\controller\AuthenticationController.class
 org\stadium\userservice\controller\InternalUserController.class
 org\stadium\userservice\dto\LoginRequest.class
 org\stadium\userservice\repository\UserRepository.class
+org\stadium\userservice\controller\UserController.class
+org\stadium\userservice\repository\RefreshTokenRepository.class
+org\stadium\userservice\entity\RefreshToken$RefreshTokenBuilder.class
 org\stadium\userservice\entity\RefreshToken.class
+org\stadium\userservice\service\RefreshTokenService.class
 org\stadium\userservice\userconfig\BulkheadConfigOverride.class
+org\stadium\userservice\dto\RefreshTokenRequest.class
 org\stadium\UserServiceApplication.class
