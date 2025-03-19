@@ -19,6 +19,7 @@ import lombok.Data;
 public class JwtConfig {
     private String secret;
     private Long expiration;
+    private Long refreshExpiration;
     private String issuer;
     
 
