@@ -8,6 +8,8 @@ import org.stadium.userservice.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,9 +21,12 @@ public class RefreshTokenService {
     private final UserRepository userRepository;
     private final JwtConfig jwtConfig;
 
+    @Transactional
     public RefreshToken createRefreshToken(String email) {
         User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new RuntimeException("User not found"));
+            
+        refreshTokenRepository.deleteAllByUser(user);
         
         RefreshToken refreshToken = RefreshToken.builder()
             .user(user)
