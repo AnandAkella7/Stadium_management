@@ -9,6 +9,7 @@ import org.stadium.commonservice.feign.UserFeignClient;
 
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.server.ResponseStatusException;
@@ -34,44 +35,72 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, 
                                    HttpServletResponse response, 
-                                   FilterChain filterChain) throws ServletException, java.io.IOException { // Fix IOException import
-        try {
-            String jwt = parseJwt(request);
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)) { // Changed method name
-                String email = jwtUtils.getEmailFromJwtToken(jwt); // Changed method name
+                                   FilterChain filterChain) throws ServletException, java.io.IOException {// Fix IOException import
+            try {
+                String jwt = parseJwt(request);
+                System.out.println("JWT Token parsed: " + (jwt != null ? "YES" : "NO"));
                 
-                UserDetailsDto userDetails = circuitBreakerFactory.create("user-service")
-                    .run(() -> userFeignClient.getUserByEmail(email),
-                        throwable -> { 
-                            throw new ResponseStatusException( // Use Spring exception
-                                HttpStatus.SERVICE_UNAVAILABLE,
-                                "User service unavailable"
+                if (jwt != null) {
+                    boolean isValid = jwtUtils.validateJwtToken(jwt);
+                    System.out.println("JWT Token valid: " + (isValid ? "YES" : "NO"));
+                    
+                    if (isValid) {
+                        String email = jwtUtils.getEmailFromJwtToken(jwt);
+                        System.out.println("Email from token: " + email);
+                        
+                        try {
+                            UserDetailsDto userDetails = circuitBreakerFactory.create("user-service")
+                                .run(() -> userFeignClient.getUserByEmail(email),
+                                    throwable -> { 
+                                        System.out.println("Circuit breaker error: " + throwable.getMessage());
+                                        throw new ResponseStatusException(
+                                            HttpStatus.SERVICE_UNAVAILABLE,
+                                            "User service unavailable"
+                                        );
+                                    });
+                            
+                            System.out.println("UserDetailsDto retrieved successfully");
+                            
+                            // Create proper authentication object
+                            UsernamePasswordAuthenticationToken authentication = 
+                                new UsernamePasswordAuthenticationToken(
+                                    userDetails.toUserDetails(),
+                                    jwt,
+                                    userDetails.toUserDetails().getAuthorities()
+                                );
+                            authentication.setDetails(
+                                new WebAuthenticationDetailsSource().buildDetails(request)
                             );
-                        });
-
-                // Create proper authentication object
-                UsernamePasswordAuthenticationToken authentication = 
-                    new UsernamePasswordAuthenticationToken(
-                        userDetails.toUserDetails(),
-                        jwt,
-                        userDetails.toUserDetails().getAuthorities()
-                    );
-                authentication.setDetails(
-                    new WebAuthenticationDetailsSource().buildDetails(request)
-                );
+                            
+                            SecurityContextHolder.getContext().setAuthentication(authentication);
+                            System.out.println("Authentication set in SecurityContextHolder");
+                        } catch (Exception e) {
+                            System.out.println("Error retrieving user details: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+                }
                 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                // Log current authentication state before proceeding
+                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                System.out.println("Current authentication: " + (auth != null ? auth.getName() + ", Authenticated: " + auth.isAuthenticated() : "NULL"));
+                
+            } catch (ResponseStatusException ex) {
+                System.out.println("ResponseStatusException: " + ex.getMessage());
+                response.sendError(ex.getStatusCode().value(), ex.getReason());
+                return;
+            } catch (Exception ex) {
+                System.out.println("Unexpected exception: " + ex.getMessage());
+                ex.printStackTrace();
+                response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
+                return;
             }
-        } catch (ResponseStatusException ex) {
-            response.sendError(ex.getStatusCode().value(), ex.getReason());
-        } catch (Exception ex) {
-            logger.error("Authentication error", ex);
-            response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        }
-        filterChain.doFilter(request, response);
-    }
+            
+            filterChain.doFilter(request, response);
+            }
+                                    
 
-    // Add this method
+    // Jwt parsing
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {

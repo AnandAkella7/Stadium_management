@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/internal/users/**")
                     .access(
                         new WebExpressionAuthorizationManager(
-                            "hasRole(admin) or hasHeader('X-Internal-Request','true')"
+                            "hasRole('ROLE_ADMIN') or request.getHeader('X-Internal-Request') != null"
                             )
                         )
                 .requestMatchers("/api/users/profile").authenticated()
