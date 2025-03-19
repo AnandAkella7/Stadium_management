@@ -18,6 +18,11 @@
       "sourceType": "org.stadium.commonservice.security.JwtConfig"
     },
     {
+      "name": "jwt.refresh-expiration",
+      "type": "java.lang.Long",
+      "sourceType": "org.stadium.commonservice.security.JwtConfig"
+    },
+    {
       "name": "jwt.secret",
       "type": "java.lang.String",
       "sourceType": "org.stadium.commonservice.security.JwtConfig"
