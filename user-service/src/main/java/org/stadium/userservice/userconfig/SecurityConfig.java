@@ -38,6 +38,12 @@ public class SecurityConfig {
                             )
                         )
                 .requestMatchers("/api/users/profile").authenticated()
+                .requestMatchers(
+                                "/swagger-ui/**",
+                                          "/swagger-ui.html",
+                                          "/api-docs/**",
+                                        "/v3/api-docs/**"
+                                        ).permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> 
