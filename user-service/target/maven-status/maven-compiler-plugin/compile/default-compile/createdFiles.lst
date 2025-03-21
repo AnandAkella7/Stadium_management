@@ -1,4 +1,5 @@
 org\stadium\userservice\service\CustomUserDetailsService.class
+org\stadium\userservice\userconfig\OpenApiConfig.class
 org\stadium\userservice\dto\RegisterRequest.class
 org\stadium\userservice\entity\User.class
 org\stadium\userservice\dto\TokenResponseDto.class
