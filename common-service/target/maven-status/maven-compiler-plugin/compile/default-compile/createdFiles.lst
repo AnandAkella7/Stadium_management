@@ -1,5 +1,6 @@
 org\stadium\CommonServiceApplication.class
 org\stadium\commonservice\authorization\Permission.class
+org\stadium\commonservice\feign\EventFeignClient.class
 META-INF\spring-configuration-metadata.json
 org\stadium\commonservice\dto\UserDetailsDto$User.class
 org\stadium\commonservice\security\JwtAuthFilter.class

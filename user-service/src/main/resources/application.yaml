@@ -21,7 +21,7 @@ spring:
     show-sql: true
 
 jwt:
-  secret: "your-256-bit-secret-key-must-be-32-chars-long"
+  secret: "aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789+AbCdEfG="
   expiration: 3600000 # 24 hours
   refresh-expiration: 86400000
   

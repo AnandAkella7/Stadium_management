@@ -10,8 +10,9 @@
     </parent>
 
     <groupId>org.stadium</groupId>
-    <artifactId>user-service</artifactId>
-    <dependencies>
+    <artifactId>event-service</artifactId>
+
+     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -34,5 +35,4 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-
 </project>

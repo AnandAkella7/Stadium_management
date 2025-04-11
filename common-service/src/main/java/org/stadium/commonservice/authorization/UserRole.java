@@ -11,14 +11,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @Getter
 public enum UserRole {
 
-    GUEST(Set.of(Permission.EVENT_VIEW)), 
+    GUEST(Set.of(Permission.EVENT_READ)), 
     USER(Set.of(Permission.USER_READ,
         Permission.TICKET_VIEW,
         Permission.TICKET_BOOK)),
+    ORGANIZER(Set.of(
+            Permission.USER_READ,
+            Permission.EVENT_READ,
+            Permission.EVENT_CREATE,
+            Permission.EVENT_UPDATE)),
     AUDITOR(Set.of(
         Permission.USER_READ,
         Permission.TICKET_VIEW,
-        Permission.EVENT_VIEW,
+        Permission.EVENT_READ,
         Permission.REPORT_GENERATE)),
     ADMIN(Permission.ALL_PERMISSIONS);
 
