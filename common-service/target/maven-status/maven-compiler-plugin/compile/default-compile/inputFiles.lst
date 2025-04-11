@@ -1,6 +1,7 @@
 C:\Users\sarma\Videos\New folder\Stadium_management\common-service\src\main\java\org\stadium\commonservice\authorization\Permission.java
 C:\Users\sarma\Videos\New folder\Stadium_management\common-service\src\main\java\org\stadium\commonservice\authorization\UserRole.java
 C:\Users\sarma\Videos\New folder\Stadium_management\common-service\src\main\java\org\stadium\commonservice\dto\UserDetailsDto.java
+C:\Users\sarma\Videos\New folder\Stadium_management\common-service\src\main\java\org\stadium\commonservice\feign\EventFeignClient.java
 C:\Users\sarma\Videos\New folder\Stadium_management\common-service\src\main\java\org\stadium\commonservice\feign\FeignSecurityConfiguration.java
 C:\Users\sarma\Videos\New folder\Stadium_management\common-service\src\main\java\org\stadium\commonservice\feign\UserFeignClient.java
 C:\Users\sarma\Videos\New folder\Stadium_management\common-service\src\main\java\org\stadium\commonservice\security\JwtAuthFilter.java

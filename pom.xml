@@ -24,6 +24,7 @@
     <modules>
         <module>user-service</module>
         <module>common-service</module>
+        <module>event-service</module>
     </modules>
 
     <!-- Dependency Management MUST come before dependencies -->
