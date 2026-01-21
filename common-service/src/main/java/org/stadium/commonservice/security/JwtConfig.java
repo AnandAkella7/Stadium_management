@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.security.Keys;
 
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,6 @@ public class JwtConfig {
     private Long expiration;
     private Long refreshExpiration;
     private String issuer;
-    
 
     @Bean
     public SecretKey secretKey() {

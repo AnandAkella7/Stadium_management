@@ -22,3 +22,20 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv
+env/
+venv/
+*.egg-info/
+agent_test_log.txt
+output_verification.txt
+test_output.txt
+results.txt
+
+# Maven
+target/

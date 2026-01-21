@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package stadium;
+
+option java_multiple_files = true;
+option java_package = "org.stadium.common.proto";
+option java_outer_classname = "StadiumProto";
+
+// The Connection Interface
+service StadiumEventService {
+  // Agent: "I need events matching X"
+  rpc SearchEvents (EventSearchRequest) returns (EventListResponse);
+  
+  // Agent: "Get details for ID Y"
+  rpc GetEventDetails (EventIdRequest) returns (EventResponse);
+}
+
+// Request: The Agent sends this
+message EventSearchRequest {
+  string query = 1; // "Taylor Swift" or "Sports"
+}
+
+message EventIdRequest {
+  int64 id = 1;
+}
+
+// Response: The Java Server returns this
+message EventListResponse {
+  repeated EventResponse events = 1;
+}
+
+message EventResponse {
+  int64 id = 1;
+  string title = 2;
+  string category = 3;
+  string date_time = 4; // ISO format
+  string location = 5;
+  double price = 6;
+  int32 available_seats = 7;
+  string status = 8;
+}
