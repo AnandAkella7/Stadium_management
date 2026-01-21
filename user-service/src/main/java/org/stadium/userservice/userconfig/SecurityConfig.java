@@ -34,10 +34,16 @@ public class SecurityConfig {
                 .requestMatchers("/api/internal/users/**")
                     .access(
                         new WebExpressionAuthorizationManager(
-                            "hasRole(admin) or hasHeader('X-Internal-Request','true')"
+                            "hasRole('ROLE_ADMIN') or request.getHeader('X-Internal-Request') != null"
                             )
                         )
                 .requestMatchers("/api/users/profile").authenticated()
+                .requestMatchers(
+                                "/swagger-ui/**",
+                                          "/swagger-ui.html",
+                                          "/api-docs/**",
+                                        "/v3/api-docs/**"
+                                        ).permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> 

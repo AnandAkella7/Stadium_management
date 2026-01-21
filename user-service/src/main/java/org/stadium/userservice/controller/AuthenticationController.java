@@ -31,7 +31,6 @@ import org.stadium.userservice.service.RefreshTokenService;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-@Data
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -64,13 +63,15 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         
-        
+        try{
+        System.out.println("Login attempt for: " + loginRequest.getEmail());
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
                 loginRequest.getEmail(), 
                 loginRequest.getPassword()
             )
         );
+        System.out.println("Authentication successful");
             
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -78,8 +79,11 @@ public class AuthenticationController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String jwt = jwtUtils.generateToken(userDetails);
 
+        System.out.println("JWT token generated");
+
         // Generate RefreshToken
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getUsername());
+        System.out.println("Refresh token generated");
         return ResponseEntity.ok(
             new TokenResponseDto(
                 jwt,
@@ -87,6 +91,12 @@ public class AuthenticationController {
                 jwtConfig.getExpiration() // Or calculate expiresIn
             )
         );
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Login error: " + e.getMessage());
+            return ResponseEntity.status(403).body(Map.of("error", "Invalid login" + e.getMessage()));
+        }
     }
 
     @PostMapping("/refresh-token")
