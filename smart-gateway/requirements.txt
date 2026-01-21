@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+strawberry-graphql
+grpcio
+grpcio-tools
+python-dotenv
+langchain
+langchain-openai
